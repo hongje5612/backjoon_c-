@@ -1,4 +1,12 @@
-﻿#include <iostream>
+﻿/*
+https://www.acmicpc.net/problem/3197
+
+시간 초과 (time exceed) 
+
+I try to find out new solution. (새로운 방법을 찾고 있습니다.)
+*/
+
+#include <iostream>
 #include <queue>
 #include <memory>
 #include <cstring>
