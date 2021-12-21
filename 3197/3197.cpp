@@ -132,28 +132,20 @@ lake::~lake()
 
 void lake::a_day_passes()
 {
-    allocator<char> char_alloc;
-    allocator<char*> ptr_char_alloc;
+    constexpr char MELT = 'M';
+    int r, c;
 
-    char** map = ptr_char_alloc.allocate(_row_size);
-
-    for (int i = 0; i < _row_size; i++) {
-        map[i] = char_alloc.allocate(_col_size);
-    }
-
-    for (int r = 0; r < _row_size; r++) {
-        for (int c = 0; c < _col_size; c++) {
-            if (_map[r][c] == ICE && in_contack_with_water(r, c)) map[r][c] = WATER;
-            else map[r][c] = _map[r][c];
+    for (r = 0; r < _row_size; r++) {
+        for (c = 0; c < _col_size; c++) {
+            if (_map[r][c] == ICE && in_contack_with_water(r, c)) _map[r][c] = MELT;
         }
     }
 
-    swap(map, _map);
-
-    for (int i = 0; i < _row_size; i++) {
-        char_alloc.deallocate(map[i], _col_size);
+    for (r = 0; r < _row_size; r++) {
+        for (c = 0; c < _col_size; c++) {
+            if (_map[r][c] == MELT) _map[r][c] = WATER;
+        }
     }
-    ptr_char_alloc.deallocate(map, _row_size);
 }
 
 bool lake::possible_to_meet()
