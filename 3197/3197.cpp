@@ -103,6 +103,7 @@ lake::lake(int row_size, int col_size)
             else {
                 _map[i][j] = c;
             }
+            j++;
         }
     }
 }
@@ -220,5 +221,14 @@ void lake::uncheck_visited() {
         for (int j = 0; j < _col_size; j++) {
             if (_map[i][j] == VISITED) _map[i][j] = WATER;
         }
+    }
+}
+
+void lake::show() const {
+    for (int i = 0; i < _row_size; i++) {
+        for (int j = 0; j < _col_size; j++) {
+            cout << _map[i][j];
+        }
+        cout << endl;
     }
 }
