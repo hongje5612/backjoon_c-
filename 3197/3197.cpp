@@ -49,6 +49,7 @@ public :
 private :
     bool bfs();
     bool in_contack_with_water(int, int) const;
+    void uncheck_visited();
 
 private :
     char** _map;
@@ -148,17 +149,9 @@ void lake::a_day_passes()
 
 bool lake::possible_to_meet()
 {
-    return bfs();
-}
-
-void lake::show() const
-{
-    for (int i = 0; i < _row_size; i++) {
-        for (int j = 0; j < _col_size; j++) {
-            cout << _map[i][j];
-        }
-        cout << endl;
-    }
+    bool answer =  bfs();
+    uncheck_visited();
+    return answer;
 }
 
 bool lake::bfs()
@@ -220,4 +213,12 @@ bool lake::in_contack_with_water(int row, int col) const
         }
     }
     return false;
+}
+
+void lake::uncheck_visited() {
+    for (int i = 0; i < _row_size; i++) {
+        for (int j = 0; j < _col_size; j++) {
+            if (_map[i][j] == VISITED) _map[i][j] = WATER;
+        }
+    }
 }
